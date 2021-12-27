@@ -7,7 +7,7 @@ class LoginController extends GetxController {
   TextEditingController? passC;
   @override
   void onInit() {
-    emailC = TextEditingController(text: "hafifi@gmail.com");
+    emailC = TextEditingController(text: "hafifi1202@gmail.com");
     passC = TextEditingController(text: "123123");
     // TODO: implement onInit
     super.onInit();
