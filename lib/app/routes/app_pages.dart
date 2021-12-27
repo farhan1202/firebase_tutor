@@ -6,6 +6,8 @@ import '../modules/intro/login/bindings/login_binding.dart';
 import '../modules/intro/login/views/login_view.dart';
 import '../modules/intro/register/bindings/register_binding.dart';
 import '../modules/intro/register/views/register_view.dart';
+import '../modules/intro/resetPass/bindings/reset_pass_binding.dart';
+import '../modules/intro/resetPass/views/reset_pass_view.dart';
 
 part 'app_routes.dart';
 
@@ -32,6 +34,12 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => RegisterView(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.RESET_PASS,
+      page: () => ResetPassView(),
+      binding: ResetPassBinding(),
+      transition: Transition.rightToLeft,
     ),
   ];
 }

@@ -29,6 +29,15 @@ class LoginView extends GetView<LoginController> {
                 decoration: InputDecoration(hintText: "Password"),
               ),
               SizedBox(height: 10),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(Routes.RESET_PASS);
+                    },
+                    child: Text("Reset Password")),
+              ),
+              SizedBox(height: 10),
               ElevatedButton(
                 onPressed: () {
                   authC.login(

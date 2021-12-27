@@ -61,6 +61,19 @@ class AuthController extends GetxController {
     await FirebaseAuth.instance.signOut();
     Get.offAllNamed(Routes.LOGIN);
   }
+
+  void resetPassword(String email) async {
+    if (GetUtils.isEmail(email)) {
+      try {
+        await auth.sendPasswordResetEmail(email: email);
+        Get.back();
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      getMessage("Email tidak valid");
+    }
+  }
 }
 
 void getMessage(String msg) {
