@@ -23,26 +23,50 @@ class HomeView extends GetView<HomeController> {
               icon: Icon(Icons.logout))
         ],
       ),
-      body: FutureBuilder<QuerySnapshot<Object?>>(
-          future: controller.getData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              var dataDocs = snapshot.data!.docs;
+      body:
+          // On time database
+          // FutureBuilder<QuerySnapshot<Object?>>(
+          //     future: controller.getData(),
+          //     builder: (context, snapshot) {
+          //       if (snapshot.connectionState == ConnectionState.done) {
+          //         var dataDocs = snapshot.data!.docs;
 
-              return ListView.builder(
-                itemCount: dataDocs.length,
-                itemBuilder: (context, i) => ListTile(
-                  title: Text(
-                      "${(dataDocs[i].data() as Map<String, dynamic>)["name"]}"),
-                  subtitle: Text(
-                      "Rp ${(dataDocs[i].data() as Map<String, dynamic>)["price"]}"),
-                ),
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(),
+          //         return ListView.builder(
+          //           itemCount: dataDocs.length,
+          //           itemBuilder: (context, i) => ListTile(
+          //             title: Text(
+          //                 "${(dataDocs[i].data() as Map<String, dynamic>)["name"]}"),
+          //             subtitle: Text(
+          //                 "Rp ${(dataDocs[i].data() as Map<String, dynamic>)["price"]}"),
+          //           ),
+          //         );
+          //       }
+          //       return Center(
+          //         child: CircularProgressIndicator(),
+          //       );
+          //     }),
+
+          //Realtime database
+          StreamBuilder<QuerySnapshot<Object?>>(
+        stream: controller.streamData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            var dataDocs = snapshot.data!.docs;
+            return ListView.builder(
+              itemCount: dataDocs.length,
+              itemBuilder: (context, i) => ListTile(
+                title: Text(
+                    "${(dataDocs[i].data() as Map<String, dynamic>)["name"]}"),
+                subtitle: Text(
+                    "Rp ${(dataDocs[i].data() as Map<String, dynamic>)["price"]}"),
+              ),
             );
-          }),
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Get.toNamed(Routes.ADD_PRODUCT);
