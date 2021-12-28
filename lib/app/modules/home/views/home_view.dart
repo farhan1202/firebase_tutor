@@ -55,6 +55,16 @@ class HomeView extends GetView<HomeController> {
             return ListView.builder(
               itemCount: dataDocs.length,
               itemBuilder: (context, i) => ListTile(
+                trailing: IconButton(
+                    onPressed: () {
+                      controller.deletData(dataDocs[i].id);
+                    },
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                    )),
+                onTap: () =>
+                    Get.toNamed(Routes.EDIT_PRODUCT, arguments: dataDocs[i].id),
                 title: Text(
                     "${(dataDocs[i].data() as Map<String, dynamic>)["name"]}"),
                 subtitle: Text(

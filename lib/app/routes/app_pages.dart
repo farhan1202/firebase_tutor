@@ -10,6 +10,8 @@ import '../modules/intro/resetPass/bindings/reset_pass_binding.dart';
 import '../modules/intro/resetPass/views/reset_pass_view.dart';
 import '../modules/main/addProduct/bindings/add_product_binding.dart';
 import '../modules/main/addProduct/views/add_product_view.dart';
+import '../modules/main/editProduct/bindings/edit_product_binding.dart';
+import '../modules/main/editProduct/views/edit_product_view.dart';
 
 part 'app_routes.dart';
 
@@ -47,6 +49,11 @@ class AppPages {
       name: _Paths.ADD_PRODUCT,
       page: () => AddProductView(),
       binding: AddProductBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PRODUCT,
+      page: () => EditProductView(),
+      binding: EditProductBinding(),
     ),
   ];
 }
