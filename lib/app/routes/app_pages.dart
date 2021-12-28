@@ -8,6 +8,8 @@ import '../modules/intro/register/bindings/register_binding.dart';
 import '../modules/intro/register/views/register_view.dart';
 import '../modules/intro/resetPass/bindings/reset_pass_binding.dart';
 import '../modules/intro/resetPass/views/reset_pass_view.dart';
+import '../modules/main/addProduct/bindings/add_product_binding.dart';
+import '../modules/main/addProduct/views/add_product_view.dart';
 
 part 'app_routes.dart';
 
@@ -40,6 +42,11 @@ class AppPages {
       page: () => ResetPassView(),
       binding: ResetPassBinding(),
       transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: _Paths.ADD_PRODUCT,
+      page: () => AddProductView(),
+      binding: AddProductBinding(),
     ),
   ];
 }

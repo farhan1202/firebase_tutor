@@ -66,6 +66,7 @@ class AuthController extends GetxController {
     if (GetUtils.isEmail(email)) {
       try {
         await auth.sendPasswordResetEmail(email: email);
+        getMessage("Silahkan cek email");
         Get.back();
       } catch (e) {
         print(e);

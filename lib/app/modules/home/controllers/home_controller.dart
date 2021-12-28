@@ -1,20 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  Future<QuerySnapshot<Object?>> getData() async {
+    CollectionReference product = firestore.collection("product");
 
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+    return product.get();
+  }
 }

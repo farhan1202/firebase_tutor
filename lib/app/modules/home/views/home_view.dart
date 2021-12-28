@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_app/app/controllers/auth_controller.dart';
+import 'package:firebase_app/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -21,11 +23,31 @@ class HomeView extends GetView<HomeController> {
               icon: Icon(Icons.logout))
         ],
       ),
-      body: Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: FutureBuilder<QuerySnapshot<Object?>>(
+          future: controller.getData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              var dataDocs = snapshot.data!.docs;
+
+              return ListView.builder(
+                itemCount: dataDocs.length,
+                itemBuilder: (context, i) => ListTile(
+                  title: Text(
+                      "${(dataDocs[i].data() as Map<String, dynamic>)["name"]}"),
+                  subtitle: Text(
+                      "Rp ${(dataDocs[i].data() as Map<String, dynamic>)["price"]}"),
+                ),
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed(Routes.ADD_PRODUCT);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
